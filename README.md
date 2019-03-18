@@ -1,14 +1,14 @@
 # RANSAC_linesegment
-Implentation of RANSAC for lines
-
-requires OpenCV for edge detection and displaying results
+Implentation of RANSAC for lines (requires OpenCV for edge detection and displaying results)
 
 Install by: 
 
-mkdir build;
+mkdir build 
 
-cmake ../;
+cd build
 
-make;
+cmake ../
+
+make
 
 ./RANSAC_linesegment [PATH/TO/FILE] 
