@@ -3,8 +3,10 @@
 #include <string>
 #include <stdlib.h>
 #include <math.h>
+
 using namespace std;
 using namespace cv;
+
 #define PI 3.14159265 
 
 vector<float>parametric_fit(vector<Point2f> sample_points, int n, Mat frame, bool draw);
@@ -110,8 +112,10 @@ vector<Point2f> ransac_linesegment(vector<Point2f> edgepoints, int n, Mat frame,
 			min_inlier_size = new_inliers.size(); std::cout<<min_inlier_size <<" \n";
 			temp_inliers = new_inliers;
 		}
+		
 		global_sampled = remove_line_outliers(global_sampled);
 		vector<float> final_parametric = parametric_fit(global_sampled, global_sampled.size(), original, 1);
+		
 		// set the remaining unsampled points
 		vector<Point2f> remaining = edgepoints;
 		for(vector<Point2f>::iterator iter = global_sampled.begin(); iter < global_sampled.end(); iter ++ ){
@@ -162,8 +166,7 @@ int main(int argc, char *argv[])
 	Mat frame,original, canny_output;
 	srand(time(NULL));
 	vector<Point2f> edgepoints;
-	string filename = argv[1];
-	frame = imread(filename);
+	frame = imread(argv[1]);
 	cout<<"image size "<<frame.size<<endl;
 	original = frame.clone();
 	blur(frame, frame, Size(5,5));
@@ -183,6 +186,7 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
+	
 	vector<Point2f> segment = edgepoints ; int counter = 0;
 	while(1){
 		segment = ransac_linesegment(segment, n, frame, original,30);
@@ -191,10 +195,7 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
-
 	cout<<"edges detected  "<< counter<<endl;
 	//setMouseCallback("adapted fit", CallBackFunc, NULL);
 	waitKey(0);
 }
-
-
