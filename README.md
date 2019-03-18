@@ -11,4 +11,4 @@ cmake ../
 
 make
 
-./RANSAC_linesegment [PATH/TO/FILE] 
+./RANSAC_linesegment  [PATH/TO/FILE] 
